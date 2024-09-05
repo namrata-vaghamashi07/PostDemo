@@ -1,13 +1,13 @@
 // lib/widgets/post_item.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/providers/time_provider.dart';
 import 'package:flutter_demo/utils/colors/custom_color.dart';
 import 'package:flutter_demo/utils/strings/string_constants.dart';
 import 'package:flutter_demo/utils/textStyle/common_text_style.dart';
 import 'package:provider/provider.dart';
 import '../../models/post.dart';
 import '../../providers/post_provider.dart';
+import '../../providers/time_provider.dart';
 import '../../screens/post_detail_screen.dart';
 
 class PostItem extends StatelessWidget {
@@ -45,7 +45,7 @@ class PostItem extends StatelessWidget {
           builder: (context, timerProvider, child) {
             final timeLeft = timerProvider.timers[post.id]?.timeLeft ?? 0;
             return Text(
-                '${Preference.timeLeft}  $timeLeft ${Preference.second}',
+                '${StringConstants.timeLeft}  $timeLeft ${StringConstants.second}',
                 style: CommonTextStyles.postListSubText);
           },
         ),

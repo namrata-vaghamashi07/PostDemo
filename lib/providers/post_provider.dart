@@ -11,7 +11,7 @@ class PostProvider with ChangeNotifier {
   List<Post> _posts = [];
   bool _isLoading = false;
   String _errorMessage = '';
-  Post? _postDetail;
+  Post _postDetail = Post();
 
   List<Post> get posts => _posts;
   bool get isLoading => _isLoading;
@@ -25,17 +25,17 @@ class PostProvider with ChangeNotifier {
 
     try {
       final response = await http.get(Uri.parse(
-          '${Preference.endPoint}${Preference.postListApi}'));
+          '${StringConstants.endPoint}${StringConstants.postListApi}'));
 
       if (response.statusCode == 200) {
         final List<dynamic> postsJson = json.decode(response.body);
         _posts = postsJson.map((json) => Post.fromJson(json)).toList();
         await _savePostsToLocal(); // Save to local storage
       } else {
-        throw Exception(Preference.failedPostMsg);
+        throw Exception(StringConstants.failedPostMsg);
       }
     } catch (error) {
-      _errorMessage = Preference.errorPostMsg;
+      _errorMessage = StringConstants.internetErrorMsg;
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -49,17 +49,17 @@ class PostProvider with ChangeNotifier {
 
     try {
       final url =
-          '${Preference.endPoint}${Preference.postListApi}$postId';
+          '${StringConstants.endPoint}${StringConstants.postListApi}/$postId';
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
         final postJson = json.decode(response.body);
         _postDetail = Post.fromJson(postJson);
       } else {
-        throw Exception(Preference.failedPostMsg);
+        throw Exception(StringConstants.failedPostMsg);
       }
     } catch (error) {
-      _errorMessage = Preference.errorLoadPostDetailMsg;
+      _errorMessage = StringConstants.internetErrorMsg;
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -71,9 +71,9 @@ class PostProvider with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       final postsJson =
           json.encode(_posts.map((post) => post.toJson()).toList());
-      await prefs.setString(Preference.keyPost, postsJson);
+      await prefs.setString(StringConstants.keyPost, postsJson);
     } catch (error) {
-      _errorMessage = Preference.errorPostLocallyMsg;
+      _errorMessage = StringConstants.internetErrorMsg;
       notifyListeners();
     }
   }
@@ -81,19 +81,19 @@ class PostProvider with ChangeNotifier {
   Future<void> loadPostsFromLocal() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final postsJson = prefs.getString(Preference.keyPost);
+      final postsJson = prefs.getString(StringConstants.keyPost);
       if (postsJson != null) {
         final List<dynamic> decodedJson = json.decode(postsJson);
         _posts = decodedJson.map((json) => Post.fromJson(json)).toList();
       }
     } catch (error) {
-      _errorMessage = Preference.errorLoadPostMsg;
+      _errorMessage = StringConstants.internetErrorMsg;
       notifyListeners();
     }
   }
 
   void clearSelectedPost() {
-    _postDetail = null;
+    _postDetail = Post();
     notifyListeners();
   }
 

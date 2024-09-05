@@ -13,14 +13,21 @@ class PostListScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(58),
-          child: CommonAppBar(appTitle: Preference.postTitle)),
+          child: CommonAppBar(appTitle: StringConstants.postTitle)),
       body: Consumer<PostProvider>(
           builder: (ctx, postProvider, _) => postProvider.isLoading
               ? const Center(child: CircularProgressIndicator())
               : postProvider.errorMessage.isNotEmpty
-                  ? Center(child: Text(postProvider.errorMessage))
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: Text(postProvider.errorMessage)),
+                    )
                   : postProvider.posts.isEmpty
-                      ? Center(child: Text(Preference.noPostData))
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child:
+                              Center(child: Text(StringConstants.noPostData)),
+                        )
                       : ListView.builder(
                           itemCount: postProvider.posts.length,
                           itemBuilder: (ctx, index) =>
