@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/utils/strings/string_constanst.dart';
+import 'package:flutter_demo/utils/strings/string_constants.dart';
 import 'package:provider/provider.dart';
 import '../providers/post_provider.dart';
 import '../utils/widgets/common_appbar.dart';
@@ -13,14 +13,14 @@ class PostListScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(58),
-          child: CommonAppBar(appTitle: StringConstants.postTitle)),
+          child: CommonAppBar(appTitle: Preference.postTitle)),
       body: Consumer<PostProvider>(
           builder: (ctx, postProvider, _) => postProvider.isLoading
               ? const Center(child: CircularProgressIndicator())
               : postProvider.errorMessage.isNotEmpty
                   ? Center(child: Text(postProvider.errorMessage))
                   : postProvider.posts.isEmpty
-                      ? Center(child: Text(StringConstants.noPostData))
+                      ? Center(child: Text(Preference.noPostData))
                       : ListView.builder(
                           itemCount: postProvider.posts.length,
                           itemBuilder: (ctx, index) =>

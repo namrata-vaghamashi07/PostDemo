@@ -1,7 +1,7 @@
 // lib/screens/post_detail_screen.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/utils/strings/string_constanst.dart';
+import 'package:flutter_demo/utils/strings/string_constants.dart';
 import 'package:flutter_demo/utils/widgets/common_appbar.dart';
 import 'package:provider/provider.dart';
 import '../providers/post_provider.dart';
@@ -16,7 +16,7 @@ class PostDetailScreen extends StatelessWidget {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(58),
-            child: CommonAppBar(appTitle: StringConstants.postDetailTitle)),
+            child: CommonAppBar(appTitle: Preference.postDetailTitle)),
         body: Consumer<PostProvider>(builder: (context, postProvider, child) {
           final post = postProvider.postDetail!;
           return postProvider.isLoading
@@ -24,7 +24,7 @@ class PostDetailScreen extends StatelessWidget {
               : postProvider.errorMessage.isNotEmpty
                   ? Center(child: Text(postProvider.errorMessage))
                   : postProvider.postDetail == null
-                      ? Center(child: Text(StringConstants.noPostData))
+                      ? Center(child: Text(Preference.noPostData))
                       : Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(

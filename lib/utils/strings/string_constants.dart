@@ -1,4 +1,4 @@
-class StringConstants {
+class Preference {
   //Api String
   static String endPoint = 'https://jsonplaceholder.typicode.com/';
   static String postListApi = 'posts';
@@ -6,11 +6,11 @@ class StringConstants {
   //Screen String
   static String postTitle = 'Posts';
   static String timeLeft = 'Time left:';
-  static String secound = 'seconds';
+  static String second = 'seconds';
   static String noPostData = 'Post not available.';
   static String postDetailTitle = 'PostDetail';
 
-  //Share Prefernce
+  //Share Preference
   static String keyPost = 'posts';
 
   //Error Msg

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/providers/post_provider.dart';
-import 'package:flutter_demo/providers/time_povider.dart';
+import 'package:flutter_demo/providers/time_provider.dart';
 import 'package:flutter_demo/screens/post_list_screen.dart';
 import 'package:provider/provider.dart';
 
