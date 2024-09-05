@@ -17,7 +17,6 @@ class TimerProvider with ChangeNotifier {
 
     final timerData = TimerData(
       timer: Timer.periodic(const Duration(seconds: 1), (timer) {
-        print('Timer-->>> ${_timers[id]?.timeLeft}');
         if ((_timers[id]?.timeLeft ?? 0) > 0) {
           _timers[id]!.timeLeft--;
           notifyListeners();
